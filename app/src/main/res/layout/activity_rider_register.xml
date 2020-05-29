@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F0F0F3"
+        tools:context=".ui.RiderRegisterActivity">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/register"
+            android:textColor="@color/colorAccent"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@+id/neo_register_container"
+            android:layout_marginBottom="20dp"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+
+        <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+            android:id="@+id/neo_register_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            app:neomorph_background_color="@color/background"
+            app:neomorph_corner_radius="20dp"
+            app:neomorph_elevation="2dp"
+            app:neomorph_highlight_color="@color/highlight"
+            app:neomorph_shadow_color="@color/shadow"
+            app:neomorph_shadow_type="outer"
+            app:neomorph_view_type="rectangular">
+
+            <LinearLayout
+                android:id="@+id/linearlayout_signin_authentication"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:fontFamily="sans-serif-black"
+                        android:text="Full Name"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="13sp" />
+
+                    <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+                        android:id="@+id/neo_edittext_signup_username"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:neomorph_background_color="@color/background"
+                        app:neomorph_corner_radius="10dp"
+                        app:neomorph_elevation="1dp"
+                        app:neomorph_highlight_color="@color/highlight"
+                        app:neomorph_shadow_color="@color/shadow"
+                        app:neomorph_shadow_type="inner"
+                        app:neomorph_shadow_visible="true"
+                        app:neomorph_view_type="rectangular">
+
+                        <EditText
+                            android:id="@+id/rider_name_register"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/edittext_curves"
+                            android:inputType="textPersonName"
+                            android:padding="10dp"
+                            android:textColor="@color/secondaryText"
+                            android:textSize="18sp" />
+
+                    </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:fontFamily="sans-serif-black"
+                        android:text="Phone Number"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="13sp" />
+
+                    <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+                        android:id="@+id/neo_edittext_signup_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:neomorph_background_color="@color/background"
+                        app:neomorph_corner_radius="10dp"
+                        app:neomorph_elevation="1dp"
+                        app:neomorph_highlight_color="@color/highlight"
+                        app:neomorph_shadow_color="@color/shadow"
+                        app:neomorph_shadow_type="inner"
+                        app:neomorph_shadow_visible="true"
+                        app:neomorph_view_type="rectangular">
+
+                        <EditText
+                            android:id="@+id/rider_phone_register"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/edittext_curves"
+                            android:inputType="phone"
+                            android:padding="10dp"
+                            android:textColor="@color/secondaryText"
+                            android:textSize="18sp" />
+
+                    </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:fontFamily="sans-serif-black"
+                        android:text="@string/email_address"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="13sp" />
+
+                    <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+                        android:id="@+id/neo_edittext_signup_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:neomorph_background_color="@color/background"
+                        app:neomorph_corner_radius="10dp"
+                        app:neomorph_elevation="1dp"
+                        app:neomorph_highlight_color="@color/highlight"
+                        app:neomorph_shadow_color="@color/shadow"
+                        app:neomorph_shadow_type="inner"
+                        app:neomorph_shadow_visible="true"
+                        app:neomorph_view_type="rectangular">
+
+                        <EditText
+                            android:id="@+id/rider_email_register"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/edittext_curves"
+                            android:inputType="textEmailAddress"
+                            android:padding="10dp"
+                            android:textColor="@color/secondaryText"
+                            android:textSize="18sp" />
+
+                    </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="sans-serif-black"
+                        android:text="@string/password"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="13sp" />
+
+                    <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+                        android:id="@+id/neo_edittext_signup_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:neomorph_background_color="@color/background"
+                        app:neomorph_corner_radius="10dp"
+                        app:neomorph_elevation="2dp"
+                        app:neomorph_highlight_color="@color/highlight"
+                        app:neomorph_shadow_color="@color/shadow"
+                        app:neomorph_shadow_type="inner"
+                        app:neomorph_view_type="rectangular">
+
+                        <EditText
+                            android:id="@+id/rider_password_register"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/edittext_curves"
+                            android:inputType="textPassword"
+                            android:padding="10dp"
+                            android:textColor="@color/secondaryText"
+                            android:textSize="18sp" />
+
+                    </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
+                </LinearLayout>
+
+
+                <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+                    android:id="@+id/neo_edittext_signin_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    app:neomorph_background_color="@color/background"
+                    app:neomorph_corner_radius="10dp"
+                    app:neomorph_elevation="8dp"
+                    app:neomorph_highlight_color="@color/highlight"
+                    app:neomorph_shadow_color="@color/dark"
+                    app:neomorph_shadow_type="outer"
+                    app:neomorph_view_type="rectangular">
+
+                    <Button
+                        android:id="@+id/btn_rider_register"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button_curves"
+                        android:text="@string/register"
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/white"
+                        android:textSize="20sp" />
+
+                </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
+
+            </LinearLayout>
+
+        </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
+        <LinearLayout
+            android:id="@+id/linearlayout_rider_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/neo_register_container"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Already have an account?"
+                android:textColor="@color/secondaryText"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="Sign in."
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressbar_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+
+</layout>

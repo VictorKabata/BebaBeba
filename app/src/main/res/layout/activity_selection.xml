@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.SelectionActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <!--<com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            app:neomorph_background_color="@color/background"
+            app:neomorph_corner_radius="10dp"
+            app:neomorph_elevation="8dp"
+            app:neomorph_highlight_color="@color/highlight"
+            app:neomorph_shadow_color="@color/dark"
+            app:neomorph_shadow_type="outer"
+            app:neomorph_view_type="rectangular">
+
+            <Button
+                android:id="@+id/btn_select_driver"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_curves"
+                android:padding="20dp"
+                android:text="@string/driver"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+
+        </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>-->
+
+        <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            app:neomorph_background_color="@color/background"
+            app:neomorph_corner_radius="10dp"
+            app:neomorph_elevation="8dp"
+            app:neomorph_highlight_color="@color/highlight"
+            app:neomorph_shadow_color="@color/dark"
+            app:neomorph_shadow_type="outer"
+            app:neomorph_view_type="rectangular">
+
+            <Button
+                android:id="@+id/btn_select_customer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_curves"
+                android:padding="20dp"
+                android:text="@string/rider"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+
+        </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "793775135672",
+    "firebase_url": "https://beba-beba-f235e.firebaseio.com",
+    "project_id": "beba-beba-f235e",
+    "storage_bucket": "beba-beba-f235e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:793775135672:android:69a46c1bd5af9983970d4d",
+        "android_client_info": {
+          "package_name": "com.vickikbt.bebabeba"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "793775135672-v9ne1dns4sivaji4ivnt2jh2uv79hnst.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbtLF0wg0GYx4Z_1KhUu43BTLjepStfyw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "793775135672-v9ne1dns4sivaji4ivnt2jh2uv79hnst.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
