@@ -4,41 +4,33 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.vickikbt.bebabeba.R
-import com.vickikbt.bebabeba.model.DriversNearby
-import kotlinx.android.synthetic.main.driver_found_layout.view.*
+import com.vickikbt.bebabeba.model.DriversInfo
 
-class DriversNearbyAdapter(private val data: List<DriversNearby>) : RecyclerView.Adapter<DriversNearbyAdapter.ViewHolder>() {
-    private val items: MutableList<CardView>
+class DriversNearbyAdapter(val driversList: ArrayList<DriversInfo>) : RecyclerView.Adapter<DriversNearbyAdapter.DriversViewHolder>() {
 
-    init {
-        this.items = ArrayList()
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DriversViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.driver_found_layout, parent, false)
+
+        return DriversViewHolder(view)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DriversNearbyAdapter.ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.driver_found_layout, parent, false)
+    override fun getItemCount() = driversList.size
 
-        return ViewHolder(v)
+    override fun onBindViewHolder(holder: DriversViewHolder, position: Int) {
+        val drivers = driversList[position]
+        holder.tvDriverName?.text = drivers.Username
     }
 
-    override fun getItemCount(): Int {
-        return data.size
-    }
+    class DriversViewHolder(row: View) : RecyclerView.ViewHolder(row) {
+        var tvDriverName: TextView? = null
 
-    override fun onBindViewHolder(holder: DriversNearbyAdapter.ViewHolder, position: Int) {
-        holder.tvTitle.text = data[position].username
-        //items.add(holder.card)
-    }
-
-    inner class ViewHolder
-    internal constructor(
-        itemView: View
-    ) : RecyclerView.ViewHolder(itemView) {
-        val tvTitle: TextView = itemView.textView_driver_name
-
+        init {
+            this.tvDriverName = row.findViewById(R.id.textView_driver_name)
+        }
     }
 
 
 }
+

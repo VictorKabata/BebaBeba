@@ -50,10 +50,10 @@ dependencies {
     implementation 'com.firebase:geofire-java:3.0.0'
 
     //Firebase dependencies.
-    implementation 'com.google.firebase:firebase-core:17.4.1'
-    implementation 'com.google.firebase:firebase-auth:19.3.1'
-    implementation 'com.google.firebase:firebase-database:19.3.0'
-    implementation 'com.google.firebase:firebase-storage:19.1.1'
+    implementation 'com.firebaseui:firebase-ui-database:3.2.1'
+    implementation 'com.google.firebase:firebase-core:17.2.2'
+    implementation 'com.google.firebase:firebase-auth:19.2.0'
+    implementation 'com.google.firebase:firebase-database:19.2.1'
 
     //Circle ImageView
     implementation 'de.hdodenhof:circleimageview:3.1.0'
@@ -66,4 +66,10 @@ dependencies {
 
     //Bungee animations library
     implementation 'com.github.Binary-Finery:Bungee:2.0'
+
+    //Groupie recyclerview
+    implementation 'com.xwray:groupie:2.1.0'
+
+    //Glide
+    // implementation 'com.github.com.bumptech.glide:glide:4.0.0'
 }

@@ -11,7 +11,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.databinding.DataBindingUtil
 import com.firebase.geofire.GeoFire
 import com.firebase.geofire.GeoLocation
 import com.firebase.geofire.GeoQueryEventListener
@@ -27,12 +27,15 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.vickikbt.bebabeba.R
 import com.vickikbt.bebabeba.adapter.DriversNearbyAdapter
-import com.vickikbt.bebabeba.model.DriversNearby
+import com.vickikbt.bebabeba.databinding.ActivityRiderMapsBinding
+import com.vickikbt.bebabeba.model.DriversInfo
 import kotlinx.android.synthetic.main.activity_rider_maps.*
 
 class RiderMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
+
+    lateinit var binding: ActivityRiderMapsBinding
 
     //Location
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
@@ -46,9 +49,13 @@ class RiderMapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private var taxiRequests: DatabaseReference? = null
     var driversAvailable: DatabaseReference? = null
 
-    private var radius = 5.0
+    private var radius = 7.0
     private var driverFound: Boolean = false
     private var driverFoundId: String? = null
+    var distance: Float? = null
+
+    val driversList = ArrayList<DriversInfo>()
+
 
     companion object {
         const val LOCATION_PERMISSION_REQUEST_CODE = 1
@@ -57,7 +64,7 @@ class RiderMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_rider_maps)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_rider_maps)
 
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -84,6 +91,7 @@ class RiderMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         btn_cancel_ride.setOnClickListener {
             cancelRequest()
         }
+
 
     }
 
@@ -126,9 +134,9 @@ class RiderMapsActivity : AppCompatActivity(), OnMapReadyCallback {
             if (error == null) {
                 btn_request_ride.visibility = View.GONE
                 btn_cancel_ride.visibility = View.VISIBLE
-                recyclerview_drivers .visibility = View.VISIBLE
+                recyclerview_drivers.visibility = View.VISIBLE
 
-                loadRecyclerView()
+
                 Toast.makeText(applicationContext, "Taxi request made", Toast.LENGTH_SHORT).show()
             }
         }
@@ -143,31 +151,25 @@ class RiderMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         geoQuery.addGeoQueryEventListener(object : GeoQueryEventListener {
             override fun onKeyEntered(key: String?, location: GeoLocation?) {
-                /*if (!driverFound) {
-                    driverFound = true
-                    driverFoundId = key
-                }*/
-
                 driverFound = true
                 driverFoundId = key
 
-                val driverDatabaseRef: DatabaseReference =
+               /* val driverDatabaseRef: DatabaseReference =
                     FirebaseDatabase.getInstance().reference.child("Users").child("Drivers").child(driverFoundId!!)
                 val hashMap = HashMap<String, String>()
                 hashMap["CustomerRideID"] = riderUID!!
-                driverDatabaseRef.updateChildren(hashMap as Map<String, Any>)
+                driverDatabaseRef.updateChildren(hashMap as Map<String, Any>)*/
 
                 getDriverLocation()
-
-                Log.e("VickiKbt", "onKeyEntered invoked!")
+                getDriverInfo()
             }
 
             override fun onKeyExited(key: String?) {
-                Log.e("VickiKbt", "onKeyExited invoked!")
+
             }
 
             override fun onKeyMoved(key: String?, location: GeoLocation?) {
-                Log.e("VickiKbt", "onKeyMoved invoked!")
+
             }
 
             override fun onGeoQueryReady() {
@@ -175,29 +177,28 @@ class RiderMapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 if (!driverFound) {
                     getNearbyDrivers()
                 }
-                Log.e("VickiKbt", "Outer onGeoQueryReady invoked!")
+
             }
 
             override fun onGeoQueryError(error: DatabaseError?) {
-                Log.e("VickiKbt", "onGeoQueryError invoked!")
+
             }
 
         })
     }
 
     private fun getDriverLocation() {
-        val driverWorkingRef: DatabaseReference =
+        val pickUpLocation = LatLng(lastLocation.latitude, lastLocation.longitude)
+        val nearbyDriverLocation: DatabaseReference =
             FirebaseDatabase.getInstance().reference.child("GeoFire/DriversAvailable").child(driverFoundId!!).child("l")
-        driverWorkingRef.addValueEventListener(object : ValueEventListener {
+        nearbyDriverLocation.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    Log.e("VickiKbt", "closestDriver OnCanceled called invoked!")
 
                     val listMap = dataSnapshot.value as List<*>?
                     var locationLat = 0.0
                     var locationLng = 0.0
-                    Toast.makeText(applicationContext, "Driver found!", Toast.LENGTH_SHORT).show()
 
                     if (listMap!![0] != null) {
                         locationLat = listMap[0].toString().toDouble()
@@ -206,14 +207,57 @@ class RiderMapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         locationLng = listMap[1].toString().toDouble()
                     }
                     val driverLocation = LatLng(locationLat, locationLng)
-                    //mMap.clear()
+
                     mMap.animateCamera(CameraUpdateFactory.newLatLng(driverLocation))
                     mMap.addMarker(MarkerOptions().position(driverLocation).title("Your driver!"))
+
+                    //Getting the distance between the rider and the driver.
+                    val loc1 = Location("")
+                    loc1.latitude = pickUpLocation.latitude
+                    loc1.longitude = pickUpLocation.longitude
+
+                    val loc2 = Location("")
+                    loc2.latitude = driverLocation.latitude
+                    loc2.longitude = driverLocation.longitude
+
+                    distance = loc1.distanceTo(loc2)
+                    Toast.makeText(applicationContext, "Distance: $distance", Toast.LENGTH_LONG).show()
+
                 }
             }
 
             override fun onCancelled(p0: DatabaseError) {
-                TODO("Not yet implemented")
+                Toast.makeText(applicationContext, "Error: $p0", Toast.LENGTH_LONG).show()
+            }
+
+        })
+    }
+
+    private fun getDriverInfo() {
+        val driverDataReference: DatabaseReference = FirebaseDatabase.getInstance().reference.child("Users/Drivers").child(driverFoundId!!)//.child("username")
+
+        driverDataReference.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val adapter = DriversNearbyAdapter(driversList)
+
+                Log.e("VickiKbt", "Datasnapshot: $dataSnapshot")
+
+                dataSnapshot.children.forEach {
+                    val upload = it.getValue(DriversInfo::class.java)
+                    Log.e("VickiKbt", "Upload: $upload")
+                    if (upload != null) {
+                        driversList.add(upload as DriversInfo)
+                        binding.recyclerviewDrivers.adapter=adapter
+                    }else{
+                        Log.e("VickiKbt", "Upload is null ")
+                    }
+
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.e("VickiKbt", "Error: $databaseError")
+                Toast.makeText(applicationContext, "Error: $databaseError", Toast.LENGTH_LONG).show()
             }
 
         })
@@ -227,24 +271,12 @@ class RiderMapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 val currentPosition = LatLng(lastLocation.latitude, lastLocation.longitude)
                 btn_request_ride.visibility = View.VISIBLE
                 btn_cancel_ride.visibility = View.GONE
-                recyclerview_drivers .visibility = View.GONE
+                recyclerview_drivers.visibility = View.GONE
                 Toast.makeText(applicationContext, "Taxi request cancelled!", Toast.LENGTH_SHORT).show()
                 mMap.clear()
                 mMap.animateCamera(CameraUpdateFactory.newLatLng(currentPosition))
             }
         }
-    }
-
-    private fun loadRecyclerView() {
-        val data: MutableList<DriversNearby> = ArrayList()
-        for (i in 1..10)
-            data.add(DriversNearby("Driver $i"))
-
-        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        recyclerview_drivers.layoutManager = layoutManager
-        val adapter = DriversNearbyAdapter(data)
-        recyclerview_drivers.setHasFixedSize(true)
-        recyclerview_drivers.adapter = adapter
     }
 
     private fun checkLocationPermission() {
@@ -307,7 +339,7 @@ class RiderMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         fusedLocationProviderClient.removeLocationUpdates(locationCallback)
     }
 
-    public override fun onResume() {
+    override fun onResume() {
         super.onResume()
         if (!locationUpdateState) {
             startLocationUpdates()
@@ -330,7 +362,7 @@ class RiderMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val geoFire = GeoFire(taxiRequests)
 
         geoFire.removeLocation(
-            riderUID, GeoFire.CompletionListener { key, error ->
+            riderUID, GeoFire.CompletionListener { _, error ->
                 if (error == null) {
                     Toast.makeText(applicationContext, "Taxi request cancelled!", Toast.LENGTH_SHORT).show()
                 }
