@@ -1,4 +1,4 @@
-package com.vickikbt.bebabeba.ui
+package com.vickikbt.bebabeba.ui.activity
 
 import android.app.Activity
 import android.content.Intent
@@ -282,7 +282,9 @@ class RiderMapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun checkLocationPermission() {
         //Checks if the app is granted location access and if not it sak for location access.
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                LOCATION_PERMISSION_REQUEST_CODE
+            )
             return
         }
     }
@@ -290,7 +292,9 @@ class RiderMapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun startLocationUpdates() {
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                LOCATION_PERMISSION_REQUEST_CODE
+            )
             return
         }
 
@@ -316,7 +320,9 @@ class RiderMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         task.addOnFailureListener { e ->
             if (e is ResolvableApiException) {
                 try {
-                    e.startResolutionForResult(this, REQUEST_CHECK_SETTINGS)
+                    e.startResolutionForResult(this,
+                        REQUEST_CHECK_SETTINGS
+                    )
                 } catch (sendEx: IntentSender.SendIntentException) {
                     // Ignore the error.
                 }

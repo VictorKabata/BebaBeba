@@ -1,9 +1,17 @@
 package com.vickikbt.bebabeba
 
 import android.app.Application
+import androidx.annotation.Nullable
+import com.facebook.stetho.Stetho
+import com.vickikbt.bebabeba.di.repositoryModule
+import com.vickikbt.bebabeba.di.viewModelModule
+import com.vickikbt.bebabeba.utils.CrashlyticsTree
+import org.jetbrains.annotations.NotNull
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
+import timber.log.Timber
 
 class Bebabeba : Application() {
-
 
     override fun onCreate() {
         super.onCreate()
@@ -18,14 +26,25 @@ class Bebabeba : Application() {
     *  We are starting Modules in the di/Modules.kt
     * */
     private fun initKoin() {
-        TODO("Not yet implemented")
+        startKoin {
+            androidContext(this@Bebabeba)
+            modules(
+                listOf(
+                    viewModelModule,
+                    repositoryModule
+                )
+            )
+
+        }
     }
 
     /*
     *  We  Stetho to debug our room db persistence storage
     * */
     private fun initStetho() {
-        TODO("Not yet implemented")
+        if (BuildConfig.DEBUG) {
+            Stetho.initializeWithDefaults(this)
+        }
     }
 
     /*
@@ -33,7 +52,15 @@ class Bebabeba : Application() {
     *
     * */
     private fun initTimber() {
-        TODO("Not yet implemented")
+        if (BuildConfig.DEBUG) {
+            Timber.plant(object : Timber.DebugTree() {
+                @Nullable
+                override fun createStackElementTag(@NotNull element: StackTraceElement): String? {
+                    return super.createStackElementTag(element) + ":" + element.lineNumber
+                }
+            })
+        } else {
+            Timber.plant(CrashlyticsTree())
+        }
     }
-
 }

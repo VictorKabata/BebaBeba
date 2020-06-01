@@ -1,4 +1,4 @@
-package com.vickikbt.bebabeba.ui
+package com.vickikbt.bebabeba.ui.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
