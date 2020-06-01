@@ -26,9 +26,9 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.vickikbt.bebabeba.R
-import com.vickikbt.bebabeba.adapter.DriversNearbyAdapter
+import com.vickikbt.bebabeba.ui.adapter.DriversNearbyAdapter
 import com.vickikbt.bebabeba.databinding.ActivityRiderMapsBinding
-import com.vickikbt.bebabeba.model.DriversInfo
+import com.vickikbt.bebabeba.data.model.DriversInfo
 import kotlinx.android.synthetic.main.activity_rider_maps.*
 
 class RiderMapsActivity : AppCompatActivity(), OnMapReadyCallback {

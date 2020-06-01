@@ -1,4 +1,4 @@
-package com.vickikbt.bebabeba.model
+package com.vickikbt.bebabeba.data.model
 
 data class DriversInfo(
     val Username: String,
