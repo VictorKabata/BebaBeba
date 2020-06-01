@@ -14,17 +14,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <activity android:name=".ui.activity.riderauth.RiderAuth"/>
+        <activity android:name=".ui.activity.customerauth.CustomerAuth" />
+        <activity android:name=".ui.activity.onboard.OnBoardActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
         <activity android:name=".ui.activity.RiderMapsActivity" />
-
         <activity android:name=".ui.activity.RiderRegisterActivity" />
-
         <activity android:name=".ui.activity.RiderLoginActivity" />
-
         <activity android:name=".ui.activity.SelectionActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
