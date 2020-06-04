@@ -1,4 +1,4 @@
-package com.vickikbt.bebabeba.adapter
+package com.vickikbt.bebabeba.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,9 +6,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.vickikbt.bebabeba.R
-import com.vickikbt.bebabeba.model.DriversInfo
+import com.vickikbt.bebabeba.data.model.DriversInfo
 
-class DriversNearbyAdapter(val driversList: ArrayList<DriversInfo>) : RecyclerView.Adapter<DriversNearbyAdapter.DriversViewHolder>() {
+class DriversNearbyAdapter(
+    val driversList: ArrayList<DriversInfo>
+) : RecyclerView.Adapter<DriversNearbyAdapter.DriversViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DriversViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.driver_found_layout, parent, false)

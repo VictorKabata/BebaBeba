@@ -1,4 +1,4 @@
-package com.vickikbt.bebabeba.ui
+package com.vickikbt.bebabeba.ui.activity
 
 import android.app.Activity
 import android.content.Intent
@@ -26,9 +26,9 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.vickikbt.bebabeba.R
-import com.vickikbt.bebabeba.adapter.DriversNearbyAdapter
+import com.vickikbt.bebabeba.ui.adapter.DriversNearbyAdapter
 import com.vickikbt.bebabeba.databinding.ActivityRiderMapsBinding
-import com.vickikbt.bebabeba.model.DriversInfo
+import com.vickikbt.bebabeba.data.model.DriversInfo
 import kotlinx.android.synthetic.main.activity_rider_maps.*
 
 class RiderMapsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -282,7 +282,9 @@ class RiderMapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun checkLocationPermission() {
         //Checks if the app is granted location access and if not it sak for location access.
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                LOCATION_PERMISSION_REQUEST_CODE
+            )
             return
         }
     }
@@ -290,7 +292,9 @@ class RiderMapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun startLocationUpdates() {
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                LOCATION_PERMISSION_REQUEST_CODE
+            )
             return
         }
 
@@ -316,7 +320,9 @@ class RiderMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         task.addOnFailureListener { e ->
             if (e is ResolvableApiException) {
                 try {
-                    e.startResolutionForResult(this, REQUEST_CHECK_SETTINGS)
+                    e.startResolutionForResult(this,
+                        REQUEST_CHECK_SETTINGS
+                    )
                 } catch (sendEx: IntentSender.SendIntentException) {
                     // Ignore the error.
                 }

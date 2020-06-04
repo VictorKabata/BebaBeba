@@ -14,4 +14,11 @@
     <string name="title_activity_rider_maps">Map</string>
     <string name="request_ride">Request Ride</string>
     <string name="cancel_request">Cancel request</string>
+
+
+    <!-- Permissions -->
+    <string name="settings">Settings</string>
+    <string name="snackbar_msg_gallery_permission_denied">You can\'t open the gallery without permission.</string>
+    <string name="snackbar_msg_gallery_permission_denied_permanently">You need the give permission to open gallery.
+    </string>
 </resources>
